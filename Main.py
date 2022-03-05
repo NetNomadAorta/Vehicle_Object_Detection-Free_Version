@@ -31,9 +31,9 @@ from albumentations.pytorch import ToTensorV2
 # User parameters
 SAVE_NAME = "./Models-OD/Vehicle_Detector.model"
 USE_CHECKPOINT = True
-IMAGE_SIZE = 1000 # Row and column number 2180
+IMAGE_SIZE = 1300 # Row and column number 2180
 DATASET_PATH = "./Vehicle_Detector/"
-NUMBER_EPOCH = 30
+NUMBER_EPOCH = 100
 LEARNING_RATE = 0.0001
 BATCH_SIZE = int(32/8) # Initially just 4
 
@@ -43,17 +43,16 @@ def get_transforms(train=False):
     if train:
         transform = A.Compose([
             A.Resize(IMAGE_SIZE, IMAGE_SIZE), # our input size can be 600px
-            A.Rotate(limit=[-5,5]),
-            A.HorizontalFlip(p=0.1),
-            A.VerticalFlip(p=0.01),
-            A.ColorJitter(brightness=0.10, contrast=0.05, 
-                          saturation=0.05, hue=0.05, p=0.1),
+            A.Rotate(limit=[-45,45]),
+            A.HorizontalFlip(p=0.25),
+            A.VerticalFlip(p=0.25),
+            A.ColorJitter(brightness=0.15, contrast=0.05, 
+                          saturation=0.05, hue=0.05, p=0.25),
             ToTensorV2()
         ], bbox_params=A.BboxParams(format='coco'))
     else:
         transform = A.Compose([
             A.Resize(IMAGE_SIZE, IMAGE_SIZE), # our input size can be 600px
-            A.Rotate(limit=[90,90], always_apply=True),
             ToTensorV2()
         ], bbox_params=A.BboxParams(format='coco'))
     return transform

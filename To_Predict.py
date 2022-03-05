@@ -37,7 +37,7 @@ from torchvision.transforms import transforms as T
 SAVE_NAME_OD = "./Models-OD/Vehicle_Detector.model"
 DATA_DIR = "./Images/Training_Images/"
 USE_CHECKPOINT = True
-IMAGE_SIZE = 1000 # Row and column number 2180
+IMAGE_SIZE = 1200 # Row and column number 2180
 DATASET_PATH = "./Vehicle_Detector/"
 TO_PREDICT_PATH = "./Images/Prediction_Images/To_Predict/"
 PREDICTED_PATH = "./Images/Prediction_Images/Predicted_Images/"
