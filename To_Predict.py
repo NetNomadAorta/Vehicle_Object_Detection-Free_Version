@@ -43,7 +43,7 @@ TO_PREDICT_PATH = "./Images/Prediction_Images/To_Predict/"
 PREDICTED_PATH = "./Images/Prediction_Images/Predicted_Images/"
 SAVE_FULL_IMAGES = True
 SAVE_CROPPED_IMAGES = False
-DIE_SPACING_SCALE = 0.99
+MIN_SCORE = 0.6
 
 
 
@@ -138,7 +138,7 @@ for image_name in os.listdir(TO_PREDICT_PATH):
         prediction_1 = model_1([(transformed_image/255).to(device)])
         pred_1 = prediction_1[0]
     
-    dieCoordinates = pred_1['boxes'][pred_1['scores'] > 0.3]
+    dieCoordinates = pred_1['boxes'][pred_1['scores'] > MIN_SCORE]
     # ALLdieCoordinates x y values are SWITCHED BUT IT WRKS
     # dieCoordinates[:, 0] = pred_1['boxes'][pred_1['scores'] > 0.8][:, 1]
     # dieCoordinates[:, 1] = pred_1['boxes'][pred_1['scores'] > 0.8][:, 0]
@@ -152,7 +152,7 @@ for image_name in os.listdir(TO_PREDICT_PATH):
     if SAVE_FULL_IMAGES:
         test_image = draw_bounding_boxes(transformed_image,
             dieCoordinates,
-            [classes_1[i] for i in pred_1['labels'][pred_1['scores'] > 0.3].tolist()], 
+            [classes_1[i] for i in pred_1['labels'][pred_1['scores'] > MIN_SCORE].tolist()], 
             width=line_width
             )
         
