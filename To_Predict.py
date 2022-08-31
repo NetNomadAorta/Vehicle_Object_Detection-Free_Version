@@ -95,7 +95,7 @@ classes_1
 
 
 # lets load the faster rcnn model
-model_1 = models.detection.fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
+model_1 = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
 in_features = model_1.roi_heads.box_predictor.cls_score.in_features # we need to change the head
 model_1.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(in_features, n_classes_1)
 

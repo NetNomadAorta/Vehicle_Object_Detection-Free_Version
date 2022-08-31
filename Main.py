@@ -135,7 +135,7 @@ train_dataset = Vehicle_Detection(root=dataset_path, transforms=get_transforms(T
 
 
 # lets load the faster rcnn model
-model = models.detection.fasterrcnn_mobilenet_v3_large_fpn(pretrained=True)
+model = models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
 in_features = model.roi_heads.box_predictor.cls_score.in_features # we need to change the head
 model.roi_heads.box_predictor = models.detection.faster_rcnn.FastRCNNPredictor(in_features, n_classes)
 
